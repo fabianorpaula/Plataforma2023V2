@@ -9,9 +9,11 @@ public class Personagem : MonoBehaviour
     private Animator Animador;
     public int qtd_pulos = 2;
     public float velExtra = 0;
+    //Ataque Distancia
     public GameObject Flecha;
     public GameObject PontoDeOrigem;
-    
+    //Ataque Perto
+    public GameObject Espada;
 
     void Start()
     {
@@ -23,6 +25,24 @@ public class Personagem : MonoBehaviour
     {
         Mover();
         AtaqueDistancia();
+        AtaquePerto();
+    }
+    void AtaquePerto()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Animador.SetTrigger("Proximo");
+        }
+    }
+
+    public void AtivaEspada()
+    {
+        Espada.SetActive(true);
+    }
+
+    public void DesativaEspada()
+    {
+        Espada.SetActive(false);
     }
 
 
@@ -34,6 +54,8 @@ public class Personagem : MonoBehaviour
             Animador.SetTrigger("Disparo");
         }
     }
+
+
 
     public void Disparo()
     {
@@ -48,7 +70,7 @@ public class Personagem : MonoBehaviour
             Tiro.GetComponent<AtaqueDistancia>().MudaVelocidade(-5);
         }
     }
-
+   
     void Mover()
     {
         float velX = Input.GetAxis("Horizontal") * (4+velExtra);
