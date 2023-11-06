@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Solo
   - Atk
+  - Atk_inimigo
   layers:
   - Default
   - TransparentFX

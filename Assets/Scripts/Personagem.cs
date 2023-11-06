@@ -14,6 +14,8 @@ public class Personagem : MonoBehaviour
     public GameObject PontoDeOrigem;
     //Ataque Perto
     public GameObject Espada;
+    //Quantidade de Sangue
+    public int hp = 10;
 
     void Start()
     {
@@ -23,9 +25,13 @@ public class Personagem : MonoBehaviour
 
     void Update()
     {
-        Mover();
-        AtaqueDistancia();
-        AtaquePerto();
+        if (hp > 0)
+        {
+            Mover();
+            AtaqueDistancia();
+            AtaquePerto();
+        }
+        
     }
     void AtaquePerto()
     {
@@ -125,5 +131,31 @@ public class Personagem : MonoBehaviour
         {
             qtd_pulos = 2;
         }
+        if (tocou.gameObject.tag == "Atk_inimigo")
+        {
+            if (hp > 0)
+            {
+
+
+                Animador.SetTrigger("Dano");
+            }
+            
+        }
+    }
+
+    
+    public void Dano()
+    {
+        hp--;
+        if(hp <= 0)
+        {
+            Animador.SetBool("Morreu", true);
+            
+        }
+    }
+
+    public void Morrer()
+    {
+        Destroy(this.gameObject);
     }
 }
