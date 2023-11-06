@@ -9,6 +9,8 @@ public class Personagem : MonoBehaviour
     private Animator Animador;
     public int qtd_pulos = 2;
     public float velExtra = 0;
+    public GameObject Flecha;
+    public GameObject PontoDeOrigem;
     
 
     void Start()
@@ -20,6 +22,31 @@ public class Personagem : MonoBehaviour
     void Update()
     {
         Mover();
+        AtaqueDistancia();
+    }
+
+
+    void AtaqueDistancia()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            
+            Animador.SetTrigger("Disparo");
+        }
+    }
+
+    public void Disparo()
+    {
+        GameObject Tiro = Instantiate(Flecha, PontoDeOrigem.transform.position, Quaternion.identity);
+        Destroy(Tiro, 3f);
+        /*if(transform.localScale.x == 1)
+        {
+            //Não Preciso Fazer Nada
+        }*/
+        if(transform.localScale.x == -1)
+        {
+            Tiro.GetComponent<AtaqueDistancia>().MudaVelocidade(-5);
+        }
     }
 
     void Mover()
